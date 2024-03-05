@@ -1,0 +1,7 @@
+package com.skilldistillery.todoapp.services;
+
+public interface AuthService {
+	public User register(User user);
+	public User getUserByUsername(String user);
+	
+}

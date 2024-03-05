@@ -1,0 +1,19 @@
+1709144724289	Rename package 'controllers'
+1709144755968	Rename package 'repositories'
+1709144772448	Rename package 'services'
+1709144804712	Rename type 'ArtistRepository'
+1709144817222	Rename type 'SongRepository'
+1709145007693	Delete elements
+1709145025128	Rename type 'ArtistService'
+1709145039600	Rename type 'ArtistServiceImpl'
+1709145219299	Delete element
+1709145233547	Rename type 'ArtistController'
+1709148888804	Delete element
+1709151377474	Delete element
+1709151797064	Delete element
+1709158134689	Delete element
+1709161098643	Delete element
+1709162716355	Delete element
+1709167875468	Rename package 'com.skilldistilery'
+1709167895217	Rename package 'com.skilldistilery'
+1709167921423	Rename package 'com.skilldistilery.todoapp.controllers'

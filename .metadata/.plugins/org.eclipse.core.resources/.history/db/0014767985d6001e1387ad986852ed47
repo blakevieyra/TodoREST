@@ -1,0 +1,74 @@
+package com.skilldistillery.todoapp.services;
+
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.skilldistillery.todoapp.entities.Todo;
+import com.skilldistillery.todoapp.entities.User;
+import com.skilldistillery.todoapp.repositories.TodoRepository;
+import com.skilldistillery.todoapp.repositories.UserRepository;
+
+@Service
+public class TodoServiceImpl implements TodoService {
+
+	@Autowired
+	private TodoRepository todoRepo;
+
+	@Autowired
+	private UserRepository userRepo;
+
+	@Override
+	public Set<Todo> index(String username) {
+		return todoRepo.findByUser_Username(username);
+	}
+	
+	
+
+	@Override
+	public Todo show(String username, int tid) {
+			return todoRepo.findById(tid);
+	}
+
+	
+	
+	@Override
+	public Todo create(String username, Todo todo) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			todo.setUser(user);
+			return todoRepo.saveAndFlush(todo);
+		}
+		return todo;
+	}
+
+	@Override
+	public Todo update(String username, int tid, Todo todo) {
+		User user = userRepo.findByUsername(username);
+		Todo foundTodo = todoRepo.findById(tid);
+		if (user != null && foundTodo != null) {
+			foundTodo.setId(tid);
+			foundTodo.setUser(user);
+			foundTodo.setTask(todo.getTask());
+			foundTodo.setDescription(todo.getDescription());
+			foundTodo.setCompleted(todo.isCompleted());
+			foundTodo.setDueDate(todo.getDueDate());
+			foundTodo.setCompletedDate(todo.getCompletedDate());
+			foundTodo.setCreatedAt(todo.getCreatedAt());
+			foundTodo.setUpdatedAt(todo.getUpdatedAt());
+			return todoRepo.saveAndFlush(foundTodo);
+		}
+		return foundTodo;
+	}
+
+	@Override
+	public boolean destroy(String username, int tid) {
+		boolean isDeleted = false;
+		if (todoRepo.existsById(tid)) {
+			todoRepo.deleteById(tid);
+			return isDeleted = true;
+		}
+		return isDeleted;
+	}
+}
